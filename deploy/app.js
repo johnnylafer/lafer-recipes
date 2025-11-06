@@ -19,7 +19,7 @@ let activeFilters = {
 async function loadRecipes() {
     try {
         // Add cache busting parameter with version timestamp
-        const version = '20251106'; // Update this when recipes.json changes
+        const version = '20251106b'; // Update this when recipes.json changes
         const response = await fetch(`recipes.json?v=${version}`);
         allRecipes = await response.json();
 
