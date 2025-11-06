@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Test - Recipe Meta Tags</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 { color: #2c3e50; }
+        h2 { color: #34495e; margin-top: 0; }
+        .meta-tag {
+            background: #ecf0f1;
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        .success { color: #27ae60; }
+        .warning { color: #f39c12; }
+        .error { color: #e74c3c; }
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .test-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .test-link {
+            display: block;
+            padding: 15px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        .test-link:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🔍 SEO Implementation Test</h1>
+
+<div class="card">
+    <h2>📋 Implementation Checklist</h2>
+    <p>Follow these steps to test your SEO implementation:</p>
+    <ol>
+        <li><strong>Update Shopify Template</strong> - Copy code from <code>shopify-seo-integration.liquid</code></li>
+        <li><strong>Upload Sitemap</strong> - Upload <code>deploy/sitemap.xml</code> to Shopify Files</li>
+        <li><strong>Test URLs</strong> - Click the test links below</li>
+    </ol>
+</div>
+
+<div class="card">
+    <h2>🧪 Test Your Implementation</h2>
+    <div class="test-links">
+        <a href="https://developers.facebook.com/tools/debug/" target="_blank" class="test-link">
+            📘 Facebook Debugger<br>
+            <small>Test Open Graph tags</small>
+        </a>
+        <a href="https://cards-dev.twitter.com/validator" target="_blank" class="test-link">
+            🐦 Twitter Card Validator<br>
+            <small>Test Twitter Cards</small>
+        </a>
+        <a href="https://search.google.com/test/rich-results" target="_blank" class="test-link">
+            🔎 Google Rich Results<br>
+            <small>Test structured data</small>
+        </a>
+        <a href="https://www.linkedin.com/post-inspector/" target="_blank" class="test-link">
+            💼 LinkedIn Inspector<br>
+            <small>Test LinkedIn preview</small>
+        </a>
+        <a href="https://search.google.com/search-console" target="_blank" class="test-link">
+            📊 Search Console<br>
+            <small>Submit sitemap</small>
+        </a>
+        <a href="https://search.google.com/test/mobile-friendly" target="_blank" class="test-link">
+            📱 Mobile-Friendly Test<br>
+            <small>Test mobile UX</small>
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <h2>✅ What Should Work</h2>
+
+    <h3>1. Meta Tags on lafer.de</h3>
+    <div class="meta-tag">&lt;title&gt;Schwäbische Maultaschen - Rezept von Johann Lafer&lt;/title&gt;</div>
+    <div class="meta-tag">&lt;meta name="description" content="Dicht gefüllte Maultaschen..."&gt;</div>
+
+    <h3>2. Open Graph (Facebook/LinkedIn)</h3>
+    <div class="meta-tag">&lt;meta property="og:type" content="article"&gt;</div>
+    <div class="meta-tag">&lt;meta property="og:title" content="Schwäbische Maultaschen"&gt;</div>
+    <div class="meta-tag">&lt;meta property="og:image" content="[Recipe Image]"&gt;</div>
+
+    <h3>3. Twitter Card</h3>
+    <div class="meta-tag">&lt;meta name="twitter:card" content="summary_large_image"&gt;</div>
+    <div class="meta-tag">&lt;meta name="twitter:title" content="Schwäbische Maultaschen"&gt;</div>
+
+    <h3>4. Structured Data (Rich Snippets)</h3>
+    <pre>{
+  "@context": "https://schema.org",
+  "@type": "Recipe",
+  "name": "Schwäbische Maultaschen",
+  "author": { "@type": "Person", "name": "Johann Lafer" },
+  "prepTime": "PT1800S",
+  "recipeIngredient": [...],
+  "recipeInstructions": [...]
+}</pre>
+</div>
+
+<div class="card">
+    <h2>🎯 Test URLs</h2>
+    <p>Use these URLs for testing:</p>
+
+    <h3>Main Recipes Page:</h3>
+    <div class="meta-tag">https://lafer.de/pages/rezepte</div>
+
+    <h3>Individual Recipe Examples:</h3>
+    <div class="meta-tag">https://lafer.de/pages/rezepte?recipe=schwabische-maultaschen</div>
+    <div class="meta-tag">https://lafer.de/pages/rezepte?recipe=rindfleisch-mit-meerrettichsauce</div>
+    <div class="meta-tag">https://lafer.de/pages/rezepte?recipe=spargel-mit-sauce-hollandaise</div>
+</div>
+
+<div class="card">
+    <h2>📊 Check Results</h2>
+
+    <h3>Facebook Debugger Should Show:</h3>
+    <ul>
+        <li class="success">✓ Recipe title</li>
+        <li class="success">✓ Full description (first 160 chars)</li>
+        <li class="success">✓ Recipe image (1200x900 or similar)</li>
+        <li class="success">✓ Domain: lafer.de</li>
+    </ul>
+
+    <h3>Google Rich Results Should Show:</h3>
+    <ul>
+        <li class="success">✓ Recipe detected</li>
+        <li class="success">✓ Author: Johann Lafer</li>
+        <li class="success">✓ Image present</li>
+        <li class="success">✓ Prep/Cook time</li>
+        <li class="success">✓ Ingredients list</li>
+        <li class="success">✓ Instructions</li>
+    </ul>
+
+    <h3>Twitter Card Should Show:</h3>
+    <ul>
+        <li class="success">✓ Large image card</li>
+        <li class="success">✓ Recipe title</li>
+        <li class="success">✓ Description</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>⚠️ Common Issues</h2>
+
+    <h3>Issue: Meta tags not showing</h3>
+    <p><strong>Solution:</strong> Clear cache in testing tools. Facebook debugger has a "Fetch new information" button.</p>
+
+    <h3>Issue: Images not loading in previews</h3>
+    <p><strong>Solution:</strong> Ensure images are served over HTTPS and are at least 1200x630 pixels for OG images.</p>
+
+    <h3>Issue: Rich results test fails</h3>
+    <p><strong>Solution:</strong> Check JavaScript console - ensure recipes.json is loading. Structured data is injected via JS.</p>
+
+    <h3>Issue: Recipes not in Google yet</h3>
+    <p><strong>Solution:</strong> Submit sitemap in Search Console. Indexing takes 1-4 weeks for new sites.</p>
+</div>
+
+<div class="card">
+    <h2>📞 Next Steps</h2>
+    <ol>
+        <li>Implement Shopify template changes</li>
+        <li>Upload sitemap.xml to Shopify Files</li>
+        <li>Test with the tools above</li>
+        <li>Submit sitemap to Google Search Console</li>
+        <li>Monitor indexing progress (2-4 weeks)</li>
+    </ol>
+
+    <p><strong>Full guide:</strong> See <code>SEO-IMPLEMENTATION-GUIDE.md</code> for detailed instructions.</p>
+</div>
+
+</body>
+</html>
