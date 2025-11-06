@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title id="page-title">Rezepte - Johann Lafer</title>
+  <meta name="description" id="page-description" content="Entdecken Sie exklusive Rezepte von Sternekoch Johann Lafer">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Johann Lafer">
+  <meta property="og:title" id="og-title" content="Rezepte - Johann Lafer">
+  <meta property="og:description" id="og-description" content="Entdecken Sie exklusive Rezepte von Sternekoch Johann Lafer">
+  <meta property="og:image" id="og-image" content="https://lafer.de/cdn/shop/files/lafer-logo.jpg">
+  <meta property="og:url" id="og-url" content="{{ canonical_url }}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" id="twitter-title" content="Rezepte - Johann Lafer">
+  <meta name="twitter:description" id="twitter-description" content="Entdecken Sie exklusive Rezepte von Sternekoch Johann Lafer">
+  <meta name="twitter:image" id="twitter-image" content="https://lafer.de/cdn/shop/files/lafer-logo.jpg">
+
+  <link rel="canonical" id="canonical-link" href="{{ canonical_url }}">
+
+  <script type="application/ld+json" id="recipe-structured-data">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Rezepte - Johann Lafer",
+    "description": "Entdecken Sie exklusive Rezepte von Sternekoch Johann Lafer"
+  }
+  </script>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KS2VHTHBFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KS2VHTHBFQ', {
+      'send_page_view': false,
+      'cookie_flags': 'SameSite=None;Secure'
+    });
+
+    gtag('event', 'page_view', {
+      'page_title': document.title,
+      'page_location': window.location.href,
+      'page_path': window.location.pathname + window.location.search
+    });
+  </script>
+
+  <style>
+    body { margin: 0; padding: 0; overflow-x: hidden; }
+    .lafer-recipe-embed {
+      width: 100%;
+      min-height: 600px;
+      border: none;
+      display: block;
+    }
+    .recipe-loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="recipe-loading" id="recipeLoader">Rezepte werden geladen...</div>
+
+  <iframe
+    id="laferRecipes"
+    class="lafer-recipe-embed"
+    src=""
+    title="Johann Lafer Rezepte"
+    loading="eager"
+    onload="document.getElementById('recipeLoader').style.display='none';">
+  </iframe>
+
+  <script>
+    (function() {
+      console.log('🚀 Recipe page script starting...');
+
+      var urlParams = new URLSearchParams(window.location.search);
+      var iframe = document.getElementById('laferRecipes');
+      var baseUrl = 'https://lafer-rezepte.pages.dev/';
+      var recipeSlug = urlParams.get('recipe');
+
+      var iframeUrl;
+      if (recipeSlug) {
+        iframeUrl = baseUrl + 'recipe.html?recipe=' + encodeURIComponent(recipeSlug);
+      } else {
+        iframeUrl = baseUrl + 'index.html';
+      }
+
+      iframe.src = iframeUrl;
+      console.log('📍 Loading iframe:', iframeUrl);
+
+      if (recipeSlug) {
+        console.log('📊 Fetching recipe data for SEO...');
+
+        fetch(baseUrl + 'recipes.json?v=20251106b')
+          .then(function(response) {
+            console.log('✅ recipes.json loaded');
+            return response.json();
+          })
+          .then(function(recipes) {
+            console.log('📚 Total recipes:', recipes.length);
+
+            var recipe = recipes.find(function(r) {
+              return r.slug === recipeSlug;
+            });
+
+            if (recipe) {
+              console.log('✅ Found recipe:', recipe.name);
+
+              // Track recipe view
+              gtag('event', 'page_view', {
+                'page_title': recipe.name + ' - Rezept von Johann Lafer',
+                'page_location': window.location.href,
+                'page_path': window.location.pathname + window.location.search,
+                'recipe_name': recipe.name,
+                'recipe_id': recipe.id
+              });
+
+              gtag('event', 'view_recipe', {
+                'recipe_name': recipe.name,
+                'recipe_id': recipe.id,
+                'recipe_slug': recipe.slug
+              });
+
+              console.log('📊 Analytics tracked:', recipe.name);
+
+              // Update page title
+              var title = recipe.name + ' - Rezept von Johann Lafer';
+              document.title = title;
+
+              // Get description
+              var description = recipe.description
+                ? recipe.description.replace(/<[^>]*>/g, '').trim()
+                : 'Entdecken Sie das Rezept für ' + recipe.name + ' von Sternekoch Johann Lafer';
+
+              // Update meta tags
+              var metaDesc = document.getElementById('page-description');
+              if (metaDesc) metaDesc.setAttribute('content', description.substring(0, 160));
+
+              var ogTitle = document.getElementById('og-title');
+              if (ogTitle) ogTitle.setAttribute('content', recipe.name);
+
+              var ogDesc = document.getElementById('og-description');
+              if (ogDesc) ogDesc.setAttribute('content', description.substring(0, 160));
+
+              console.log('✅ SEO meta tags updated');
+
+              // Get image
+              if (recipe.media && recipe.media.length > 0) {
+                var media = recipe.media[0];
+                if (media.urls && media.urls['4x3'] && media.urls['4x3'].L) {
+                  var imageUrl = media.urls['4x3'].L;
+                  var ogImage = document.getElementById('og-image');
+                  if (ogImage) ogImage.setAttribute('content', imageUrl);
+                  var twitterImage = document.getElementById('twitter-image');
+                  if (twitterImage) twitterImage.setAttribute('content', imageUrl);
+                }
+              }
+
+              // Update structured data
+              var structuredData = {
+                "@context": "https://schema.org",
+                "@type": "Recipe",
+                "name": recipe.name,
+                "description": description,
+                "author": {
+                  "@type": "Person",
+                  "name": "Johann Lafer"
+                }
+              };
+
+              if (recipe.media && recipe.media[0] && recipe.media[0].urls) {
+                structuredData.image = [recipe.media[0].urls['4x3'].L];
+              }
+
+              if (recipe.prepSeconds) {
+                structuredData.prepTime = 'PT' + recipe.prepSeconds + 'S';
+              }
+
+              if (recipe.cookSeconds) {
+                structuredData.cookTime = 'PT' + recipe.cookSeconds + 'S';
+              }
+
+              if (recipe.yield) {
+                structuredData.recipeYield = recipe.yield + ' Portionen';
+              }
+
+              if (recipe.ingredients) {
+                structuredData.recipeIngredient = recipe.ingredients;
+              }
+
+              if (recipe.instructions) {
+                structuredData.recipeInstructions = recipe.instructions.map(function(step, index) {
+                  return {
+                    "@type": "HowToStep",
+                    "position": index + 1,
+                    "text": step
+                  };
+                });
+              }
+
+              var scriptTag = document.getElementById('recipe-structured-data');
+              if (scriptTag) {
+                scriptTag.textContent = JSON.stringify(structuredData, null, 2);
+              }
+
+              console.log('✅ Structured data updated');
+
+            } else {
+              console.warn('⚠️ Recipe not found:', recipeSlug);
+            }
+          })
+          .catch(function(error) {
+            console.error('❌ Error loading recipe data:', error);
+          });
+      } else {
+        gtag('event', 'view_recipe_list', {
+          'page_type': 'overview'
+        });
+        console.log('📊 Tracked recipe list view');
+      }
+
+      // Handle iframe messages
+      window.addEventListener('message', function(e) {
+        if (e.origin !== 'https://lafer-rezepte.pages.dev') return;
+
+        if (e.data.type === 'lafer-recipes-height' && e.data.height) {
+          iframe.style.transition = 'height 0.3s ease';
+          iframe.style.height = e.data.height + 'px';
+        }
+
+        if (e.data.type === 'lafer-recipes-scroll-top') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        if (e.data.height && !e.data.type) {
+          iframe.style.transition = 'height 0.3s ease';
+          iframe.style.height = e.data.height + 'px';
+        }
+      });
+
+      console.log('✅ Script initialized successfully');
+
+    })();
+  </script>
+
+</body>
+</html>
