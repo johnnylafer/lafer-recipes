@@ -852,7 +852,12 @@ function displayRecipes(recipes) {
         return;
     }
 
-    grid.innerHTML = recipes.map(recipe => createRecipeCard(recipe)).join('');
+    // Sort recipes alphabetically by name
+    const sortedRecipes = [...recipes].sort((a, b) => {
+        return a.name.localeCompare(b.name, 'de');
+    });
+
+    grid.innerHTML = sortedRecipes.map(recipe => createRecipeCard(recipe)).join('');
 }
 
 // Create recipe card HTML
