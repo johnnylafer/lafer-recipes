@@ -8,12 +8,12 @@
   - Event tracking for user interactions
 
   Installation:
-  1. Replace YOUR_GA4_ID with your Google Analytics 4 measurement ID
-  2. Add to Shopify theme as page.recipes.liquid
+  1. Add to Shopify theme as page.recipes-seo.liquid (or page.rezepte.liquid)
+  2. Apply template to your recipes page
   3. View recipe performance in Google Analytics
-{% endcomment %}
 
-{% assign recipe_slug = request.url | split: '?recipe=' | last %}
+  GA4 Measurement ID: G-KS2VHTHBFQ (already configured)
+{% endcomment %}
 
 <!DOCTYPE html>
 <html lang="de">
@@ -30,14 +30,14 @@
   <meta property="og:site_name" content="Johann Lafer">
   <meta property="og:title" id="og-title" content="Rezepte - Johann Lafer">
   <meta property="og:description" id="og-description" content="Entdecken Sie exklusive Rezepte von Sternekoch Johann Lafer">
-  <meta property="og:image" id="og-image" content="{{ 'lafer-default-recipe.jpg' | asset_url }}">
+  <meta property="og:image" id="og-image" content="https://lafer.de/cdn/shop/files/lafer-logo.jpg?v=1234">
   <meta property="og:url" id="og-url" content="{{ canonical_url }}">
 
   {% comment %} Twitter Card {% endcomment %}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" id="twitter-title" content="Rezepte - Johann Lafer">
   <meta name="twitter:description" id="twitter-description" content="Entdecken Sie exklusive Rezepte von Sternekoch Johann Lafer">
-  <meta name="twitter:image" id="twitter-image" content="{{ 'lafer-default-recipe.jpg' | asset_url }}">
+  <meta name="twitter:image" id="twitter-image" content="https://lafer.de/cdn/shop/files/lafer-logo.jpg?v=1234">
 
   {% comment %} Canonical URL {% endcomment %}
   <link rel="canonical" id="canonical-link" href="{{ canonical_url }}">
