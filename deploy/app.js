@@ -18,7 +18,9 @@ let activeFilters = {
 // Load recipes from JSON
 async function loadRecipes() {
     try {
-        const response = await fetch('recipes.json');
+        // Add cache busting parameter with version timestamp
+        const version = '20251106'; // Update this when recipes.json changes
+        const response = await fetch(`recipes.json?v=${version}`);
         allRecipes = await response.json();
 
         // Add logical categories and metadata to each recipe

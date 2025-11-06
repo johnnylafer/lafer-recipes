@@ -15,7 +15,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Load recipes from JSON file
 async function loadRecipes() {
     try {
-        const response = await fetch('recipes.json');
+        // Add cache busting parameter with version timestamp
+        const version = '20251106'; // Update this when recipes.json changes
+        const response = await fetch(`recipes.json?v=${version}`);
         allRecipes = await response.json();
     } catch (error) {
         console.error('Error loading recipes:', error);
