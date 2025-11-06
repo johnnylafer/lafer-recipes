@@ -341,7 +341,7 @@ function createFeaturedCard(recipe) {
     const recipeUrl = recipe.slug ? `recipe.html?recipe=${recipe.slug}` : `recipe.html?id=${recipe.id}`;
 
     return `
-        <a href="${recipeUrl}" class="featured-card" onclick="scrollToTopBeforeNav(event)">
+        <a href="${recipeUrl}" class="featured-card" onclick="handleRecipeClick(event, '${recipe.slug || recipe.id}')">
             ${seasonalTag ? `<span class="featured-badge">${seasonalTag.name}</span>` : ''}
             ${imageUrl ? `<img src="${imageUrl}" alt="${recipe.name}" class="featured-image" loading="lazy">` : ''}
             <div class="featured-content">
@@ -859,7 +859,7 @@ function createRecipeCard(recipe) {
     const recipeUrl = recipe.slug ? `recipe.html?recipe=${recipe.slug}` : `recipe.html?id=${recipe.id}`;
 
     return `
-        <a href="${recipeUrl}" class="recipe-card" onclick="scrollToTopBeforeNav(event)">
+        <a href="${recipeUrl}" class="recipe-card" onclick="handleRecipeClick(event, '${recipe.slug || recipe.id}')">
             ${seasonalTag ? `<span class="seasonal-badge">${seasonalTag.name}</span>` : ''}
             ${imageUrl ? `<img src="${imageUrl}" alt="${recipe.name}" class="recipe-card-image" loading="lazy">` : ''}
             <div class="recipe-card-content">
@@ -919,9 +919,41 @@ function scrollToTopBeforeNav(event) {
     return true;
 }
 
+// Handle recipe card click - notify parent window to update URL
+function handleRecipeClick(event, recipeSlug) {
+    event.preventDefault();
+
+    console.log('🔗 Recipe card clicked:', recipeSlug);
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    // Notify parent window to update its URL (for SEO and analytics)
+    if (window.self !== window.top) {
+        console.log('📤 Notifying parent window to update URL...');
+        window.parent.postMessage({
+            type: 'lafer-recipe-navigate',
+            recipeSlug: recipeSlug
+        }, '*');
+
+        // Also send scroll-to-top message
+        window.parent.postMessage({
+            type: 'lafer-recipes-scroll-top'
+        }, '*');
+    }
+
+    // Navigate iframe to recipe detail page
+    const recipeUrl = `recipe.html?recipe=${recipeSlug}`;
+    console.log('🔄 Navigating to:', recipeUrl);
+    window.location.href = recipeUrl;
+
+    return false;
+}
+
 // Make functions globally available
 window.toggleFilter = toggleFilter;
 window.scrollToTopBeforeNav = scrollToTopBeforeNav;
+window.handleRecipeClick = handleRecipeClick;
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', loadRecipes);
