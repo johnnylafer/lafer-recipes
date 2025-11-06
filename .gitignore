@@ -1,0 +1,29 @@
+# Development/Build Scripts (DO NOT DEPLOY)
+*.py
+*.sh
+*.log
+*.backup
+
+# Temporary/Cache Files
+.DS_Store
+temp_images/
+
+# Documentation (Optional - can keep for reference)
+*.md
+
+# Large Data Files (backup/temporary)
+newly_found_recipes.json
+still_missing_recipes.json
+ai_matched_recipes.json
+missing_redirects_for_ai.json
+recipes.json.backup
+missing_recipes_report.txt
+
+# DEPLOY ONLY:
+# - index.html
+# - recipe.html
+# - app.js
+# - recipe.js
+# - styles.css
+# - recipes.json
+# - redirect_mapping.json
