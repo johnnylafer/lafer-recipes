@@ -279,8 +279,12 @@ function displayFeaturedRecipes() {
     else if (month >= 8 && month <= 10) currentSeason = 'Herbst';
     else currentSeason = 'Winter';
 
+    // Exclude recipes with formatting issues from featured section
+    const excludedSlugs = ['macarons'];
+    const eligibleRecipes = allRecipes.filter(r => !excludedSlugs.includes(r.slug));
+
     // Get recipes from current season using AI season data
-    let featured = allRecipes.filter(r => {
+    let featured = eligibleRecipes.filter(r => {
         // Check AI season field first
         if (r.season === currentSeason) return true;
         // Fallback to seasonal tags
@@ -290,13 +294,13 @@ function displayFeaturedRecipes() {
 
     // If not enough seasonal recipes, add some "Ganzjährig" ones
     if (featured.length < 4) {
-        const yearRound = allRecipes.filter(r => r.season === 'Ganzjährig' && !featured.includes(r));
+        const yearRound = eligibleRecipes.filter(r => r.season === 'Ganzjährig' && !featured.includes(r));
         featured = [...featured, ...yearRound];
     }
 
     // If still not enough, add random ones
     if (featured.length < 4) {
-        const others = allRecipes.filter(r => !featured.includes(r));
+        const others = eligibleRecipes.filter(r => !featured.includes(r));
         const random = others.sort(() => 0.5 - Math.random()).slice(0, 4 - featured.length);
         featured = [...featured, ...random];
     }

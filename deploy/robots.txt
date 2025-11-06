@@ -8,4 +8,34 @@ Disallow: /
 # Allow crawling of recipes.json for the Shopify page to fetch
 Allow: /recipes.json
 
+# AI Bots (ChatGPT, Claude, Gemini, Perplexity, etc.)
+# Allow them to access recipes.json for answering recipe questions
+User-agent: GPTBot
+Allow: /recipes.json
+Disallow: /
+
+User-agent: ChatGPT-User
+Allow: /recipes.json
+Disallow: /
+
+User-agent: Claude-Web
+Allow: /recipes.json
+Disallow: /
+
+User-agent: Google-Extended
+Allow: /recipes.json
+Disallow: /
+
+User-agent: PerplexityBot
+Allow: /recipes.json
+Disallow: /
+
+User-agent: anthropic-ai
+Allow: /recipes.json
+Disallow: /
+
+User-agent: Bytespider
+Allow: /recipes.json
+Disallow: /
+
 # No sitemap here - sitemap is on lafer.de

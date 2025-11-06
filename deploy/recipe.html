@@ -80,20 +80,24 @@
                     const container = document.querySelector('.container');
                     const recipeDetail = document.querySelector('.recipe-detail');
 
+                    // Check if mobile/tablet
+                    const isMobile = window.innerWidth <= 768;
+                    const extraPadding = isMobile ? 300 : 200; // More padding on mobile
+
                     let height;
                     if (recipeDetail && recipeDetail.offsetHeight > 0) {
                         // Use the recipe detail element height + padding
-                        height = recipeDetail.offsetHeight + 200; // Add some breathing room
+                        height = recipeDetail.offsetHeight + extraPadding;
                     } else if (container && container.offsetHeight > 0) {
                         // Fallback to container
-                        height = container.offsetHeight + 100;
+                        height = container.offsetHeight + extraPadding;
                     } else {
-                        // Last resort: use document measurements
+                        // Last resort: use document measurements + padding
                         height = Math.max(
                             document.body.scrollHeight,
                             document.body.offsetHeight,
                             document.documentElement.scrollHeight
-                        );
+                        ) + extraPadding;
                     }
 
                     // Send to parent window (Shopify)
@@ -102,7 +106,7 @@
                         height: height
                     }, '*');
 
-                    console.log('📏 Sent height to parent:', height, 'px (recipe detail)');
+                    console.log('📏 Sent height to parent:', height, 'px (recipe detail, mobile:', isMobile + ')');
                 });
             }
 

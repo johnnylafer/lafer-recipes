@@ -45,7 +45,7 @@ html {
 .container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 40px 20px 80px 20px; /* Added 80px bottom padding */
 }
 
 /* Header - Premium, clean */
@@ -866,7 +866,7 @@ iframe {
 .recipe-footer {
     text-align: center;
     margin: 60px 0 40px;
-    padding: 30px 0;
+    padding: 30px 0 60px 0; /* Added extra 60px bottom padding */
     border-top: 1px solid var(--border-light);
 }
 
