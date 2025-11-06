@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  lafer-recipes:
+    build: .
+    container_name: lafer-recipes
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    environment:
+      - NGINX_HOST=_
+      - NGINX_PORT=80
+    labels:
+      - "coolify.managed=true"

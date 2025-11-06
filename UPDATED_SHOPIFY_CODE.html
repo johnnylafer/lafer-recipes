@@ -1,0 +1,107 @@
+<!--
+  UPDATED SHOPIFY PAGE CODE
+  Replace the HTML in your custom_html_JAagqh section with this
+-->
+
+<style>
+  /* Hide page title if you want the recipe system to have its own header */
+  .page-header { display: none; }
+
+  /* Full-width container */
+  .main-content { max-width: 100%; padding: 0; }
+  .container { max-width: 100%; padding: 0; }
+
+  /* Responsive iframe styling */
+  .lafer-recipe-embed {
+    width: 100%;
+    min-height: 600px; /* Minimum height to prevent flicker */
+    border: none;
+    display: block;
+    overflow: hidden; /* Prevent internal scrollbars */
+  }
+
+  /* Loading state */
+  .recipe-loading {
+    text-align: center;
+    padding: 60px 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #666;
+  }
+
+  .recipe-loading::after {
+    content: "Rezepte werden geladen...";
+    display: block;
+    margin-top: 20px;
+    font-size: 18px;
+  }
+</style>
+
+<div class="recipe-loading" id="recipeLoader"></div>
+
+<iframe
+  id="laferRecipes"
+  class="lafer-recipe-embed"
+  src=""
+  title="Johann Lafer Rezepte"
+  loading="eager"
+  allow="fullscreen"
+  onload="document.getElementById('recipeLoader').style.display='none';">
+</iframe>
+
+<script>
+  (function() {
+    // Get URL parameters from Shopify page
+    const urlParams = new URLSearchParams(window.location.search);
+    const iframe = document.getElementById('laferRecipes');
+    const baseUrl = 'https://lafer-rezepte.pages.dev/';
+
+    // Build iframe URL
+    let iframeUrl;
+
+    if (urlParams.has('recipe')) {
+      // Recipe detail page - pass the slug
+      const recipeSlug = urlParams.get('recipe');
+      iframeUrl = baseUrl + 'recipe.html?recipe=' + encodeURIComponent(recipeSlug);
+      console.log('Loading recipe:', recipeSlug);
+    } else if (window.location.hash) {
+      // Hash-based deep linking (fallback)
+      iframeUrl = baseUrl + window.location.hash;
+    } else {
+      // Default index page
+      iframeUrl = baseUrl + 'index.html';
+    }
+
+    // Set iframe source
+    iframe.src = iframeUrl;
+    console.log('Iframe URL:', iframeUrl);
+  })();
+
+  // Auto-resize iframe based on content height
+  window.addEventListener('message', function(e) {
+    // Accept messages from lafer-rezepte.pages.dev
+    if (e.origin !== 'https://lafer-rezepte.pages.dev') return;
+
+    const iframe = document.getElementById('laferRecipes');
+    if (!iframe) return;
+
+    // Handle height messages
+    if (e.data.type === 'lafer-recipes-height' && e.data.height) {
+      // Add smooth transition for height changes
+      iframe.style.transition = 'height 0.3s ease';
+      iframe.style.height = e.data.height + 'px';
+      console.log('📏 Updated iframe height:', e.data.height + 'px');
+    }
+
+    // Handle scroll-to-top messages
+    if (e.data.type === 'lafer-recipes-scroll-top') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      console.log('⬆️ Scrolled to top');
+    }
+
+    // Legacy height support (for backward compatibility)
+    if (e.data.height && !e.data.type) {
+      iframe.style.transition = 'height 0.3s ease';
+      iframe.style.height = e.data.height + 'px';
+    }
+  });
+</script>

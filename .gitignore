@@ -9,7 +9,7 @@
 temp_images/
 
 # Documentation (Optional - can keep for reference)
-*.md
+# *.md  # Commented out - we want deployment docs in repo
 
 # Large Data Files (backup/temporary)
 newly_found_recipes.json

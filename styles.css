@@ -1,0 +1,991 @@
+/* Lafer.de Exact Match Styling */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #1c1b1b;      /* Dark charcoal - lafer.de primary */
+    --accent-red: #f94c43;         /* Lafer red accent */
+    --accent-gold: #f6a429;        /* Star/rating gold */
+    --text-gray: #6a6a6a;          /* Body text gray */
+    --border-color: #dddddd;       /* Light borders */
+    --border-light: #e9e9e9;       /* Lighter borders */
+    --background: #ffffff;         /* White background */
+}
+
+body {
+    font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--primary-color);
+    line-height: 1.65;              /* lafer.de uses 1.65 */
+    background-color: var(--background);
+    font-weight: 400;
+    font-size: 14px;                /* 0.875rem = 14px */
+    overflow-x: hidden;             /* Prevent horizontal scrollbar */
+}
+
+/* Hide scrollbar when embedded in iframe to prevent double scrollbar */
+body.in-iframe {
+    overflow: hidden !important;
+    height: auto !important;
+    position: static !important;
+}
+
+html.in-iframe {
+    overflow: hidden !important;
+    height: auto !important;
+}
+
+html {
+    overflow-x: hidden;             /* Prevent horizontal scrollbar on html */
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Header - Premium, clean */
+.header {
+    text-align: center;
+    padding: 40px 0 50px;
+    border-bottom: 1px solid var(--border-light);
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 22px;                /* lafer.de h2 with 0.8 factor = ~22px */
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    font-weight: 300;               /* lafer.de uses light weight for headings */
+    letter-spacing: 0.1em;          /* lafer.de uses 0.1em letter spacing */
+    text-transform: uppercase;      /* lafer.de uppercases headings */
+}
+
+.header .subtitle {
+    font-size: 14px;                /* text-base = 0.875rem = 14px */
+    color: var(--text-gray);
+    font-weight: 400;
+}
+
+/* Featured Recipes Section */
+.featured-section {
+    margin-bottom: 50px;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 50px;
+}
+
+.featured-title {
+    font-size: 18px;
+    color: var(--primary-color);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.featured-card {
+    background: white;
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.featured-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.featured-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(255,255,255,0.95);
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 400;
+    border: 1px solid var(--border-color);
+    z-index: 10;
+    backdrop-filter: blur(4px);
+    color: var(--primary-color);
+}
+
+.featured-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.featured-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.featured-card-title {
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    color: var(--primary-color);
+    line-height: 1.4;
+}
+
+.featured-description {
+    font-size: 13px;
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin-bottom: 12px;
+    flex-grow: 1;
+}
+
+.featured-category {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #f5f5f5;
+    color: var(--text-gray);
+    font-size: 11px;
+    font-weight: 400;
+    border: 1px solid var(--border-light);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Seasonal Badges on regular cards */
+.seasonal-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255,255,255,0.95);
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 400;
+    border: 1px solid var(--border-color);
+    z-index: 10;
+    backdrop-filter: blur(4px);
+}
+
+.recipe-card {
+    position: relative;
+}
+
+/* Filter Bar */
+.filter-bar {
+    margin-bottom: 40px;
+}
+
+.search-box {
+    margin-bottom: 30px;
+}
+
+/* Filter Sections */
+.filter-section {
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 15px;
+}
+
+.filter-title {
+    font-size: 13px;
+    color: var(--primary-color);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+/* Collapsible Filter Titles */
+.filter-title.collapsible {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px 0;
+    margin-bottom: 0;
+    transition: color 0.2s;
+}
+
+.filter-title.collapsible:hover {
+    color: var(--accent-red);
+}
+
+.collapse-icon {
+    font-size: 10px;
+    transition: transform 0.3s;
+}
+
+/* Filter Content - Collapsible */
+.filter-content {
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    padding-top: 12px;
+}
+
+.filter-content.collapsed {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 14px 20px;             /* Slightly reduced padding */
+    font-size: 14px;
+    font-family: 'Nunito Sans', sans-serif;
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+    background: white;
+    color: var(--primary-color);
+    transition: border-color 0.2s;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.search-box input::placeholder {
+    color: var(--text-gray);
+}
+
+/* Filter Toggle Button - Matches filter-title style */
+.filter-toggle-header {
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 15px;
+}
+
+.filter-toggle-btn {
+    width: 100%;
+    padding: 0;
+    background: none;
+    border: none;
+    font-size: 13px;
+    color: var(--primary-color);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.2s;
+    text-align: left;
+}
+
+.filter-toggle-btn:hover {
+    color: var(--accent-red);
+}
+
+.filter-toggle-btn .collapse-icon {
+    font-size: 10px;
+    transition: transform 0.3s;
+}
+
+/* All Filters Container */
+.all-filters-container {
+    max-height: 5000px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
+}
+
+.all-filters-container.collapsed {
+    max-height: 0;
+    opacity: 0;
+}
+
+.category-filters,
+.time-filters,
+.allergen-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-btn,
+.filter-btn {
+    padding: 10px 20px;
+    background: white;
+    border: 1px solid var(--border-color);
+    color: var(--primary-color);
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 13px;                /* 0.8125rem = 13px */
+    font-weight: 400;
+    font-family: 'Nunito Sans', sans-serif;
+    letter-spacing: 0;
+    text-transform: uppercase;      /* lafer.de uppercases buttons */
+}
+
+.category-btn:hover,
+.filter-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.category-btn.active,
+.filter-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Allergen buttons have a distinct style when active */
+.allergen-btn.active {
+    background: var(--accent-red);
+    border-color: var(--accent-red);
+}
+
+/* Recipe Count */
+.recipe-count {
+    margin-bottom: 30px;
+    font-size: 14px;
+    color: var(--text-gray);
+    font-weight: 400;
+}
+
+.recipe-count span {
+    font-weight: 400;               /* lafer.de uses regular weight */
+    color: var(--primary-color);
+}
+
+/* Recipe Grid - Clean, minimal */
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.recipe-card {
+    background: white;
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+    transition: transform 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.recipe-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-color);
+}
+
+.recipe-card-image {
+    width: 100%;
+    height: 240px;                  /* Reduced from 280px */
+    object-fit: cover;
+    display: block;
+}
+
+.recipe-card-content {
+    padding: 20px;                  /* Reduced from 24px */
+}
+
+.recipe-card-title {
+    font-size: 14px;                /* lafer.de uses base text size for card titles */
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+    line-height: 1.4;
+    letter-spacing: 0;
+}
+
+.recipe-card-description {
+    font-size: 12px;
+    color: var(--text-gray);
+    line-height: 1.5;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.recipe-card-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;                /* 0.75rem = 12px (xs size) */
+    color: var(--text-gray);
+    margin-bottom: 10px;
+    font-weight: 400;
+    flex-wrap: wrap;
+}
+
+.recipe-card-category {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #f5f5f5;
+    color: var(--text-gray);
+    font-size: 12px;
+    font-weight: 400;               /* lafer.de uses regular weight for badges */
+    border: 1px solid var(--border-light);
+    margin-top: 8px;
+}
+
+/* Recipe Detail Page */
+.back-button {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.back-button a {
+    color: var(--text-gray);
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-button a:hover {
+    color: var(--primary-color);
+}
+
+.recipe-detail-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.recipe-detail-title {
+    font-size: 22px;                /* lafer.de h2 with 0.8 factor = ~22px */
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-weight: 300;               /* lafer.de uses light weight for headings */
+    letter-spacing: 0.1em;          /* lafer.de uses 0.1em letter spacing */
+    text-transform: uppercase;      /* lafer.de uppercases headings */
+}
+
+.recipe-detail-image {
+    width: 100%;
+    max-height: 400px;              /* Reduced from 600px */
+    object-fit: cover;
+    margin-bottom: 30px;
+    border: 1px solid var(--border-light);
+}
+
+.recipe-detail-meta {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0;
+    font-size: 14px;
+    color: var(--text-gray);
+    flex-wrap: wrap;
+}
+
+.recipe-detail-meta div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 400;
+}
+
+.recipe-detail-meta strong {
+    color: var(--primary-color);
+    font-weight: 400;               /* lafer.de uses regular weight, emphasis via color */
+}
+
+.recipe-detail-description {
+    font-size: 14px;                /* text-base = 14px */
+    color: var(--text-gray);
+    margin: 20px 0;
+    line-height: 1.65;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Two-column layout for recipe details */
+.recipe-detail-body {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto 40px;
+}
+
+.recipe-detail-section {
+    margin: 0;
+}
+
+.recipe-detail-section h2 {
+    font-size: 18px;                /* lafer.de h3 with 0.8 factor = ~18px */
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-weight: 300;               /* lafer.de uses light weight for headings */
+    letter-spacing: 0.1em;          /* lafer.de uses 0.1em letter spacing */
+    text-transform: uppercase;      /* lafer.de uppercases headings */
+}
+
+.recipe-ingredients,
+.recipe-directions {
+    list-style: none;
+    padding: 0;
+}
+
+.recipe-ingredients li {
+    padding: 12px 0;                /* Reduced padding */
+    border-bottom: 1px solid var(--border-light);
+    font-size: 14px;
+    color: var(--text-gray);
+}
+
+.recipe-ingredients li:first-child {
+    border-top: 1px solid var(--border-light);
+}
+
+.recipe-directions li {
+    padding: 20px 0 20px 50px;     /* Reduced padding */
+    border-bottom: 1px solid var(--border-light);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-gray);
+    counter-increment: step-counter;
+    position: relative;
+}
+
+.recipe-directions li:first-child {
+    border-top: 1px solid var(--border-light);
+}
+
+.recipe-directions {
+    counter-reset: step-counter;
+}
+
+.recipe-directions li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    top: 20px;
+    width: 34px;                    /* Slightly smaller */
+    height: 34px;
+    background: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;               /* lafer.de uses regular weight */
+    font-size: 16px;
+}
+
+/* Action Buttons - Lafer style */
+.recipe-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.btn-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--primary-color);
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 13px;                /* 0.8125rem = 13px */
+    font-weight: 400;
+    font-family: 'Nunito Sans', sans-serif;
+    transition: all 0.2s;
+    letter-spacing: 0;
+    text-transform: uppercase;      /* lafer.de uppercases buttons */
+}
+
+.btn-action:hover {
+    background: var(--accent-red);
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 30px 0;
+    border-top: 1px solid var(--border-light);
+    color: var(--text-gray);
+    margin-top: 60px;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+    .recipe-detail-body {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 16px;
+    }
+
+    .header h1 {
+        font-size: 20px;          /* Keep heading small on mobile too */
+    }
+
+    .header {
+        padding: 30px 0 40px;
+        margin-bottom: 30px;
+    }
+
+    .recipe-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .featured-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .recipe-detail-title {
+        font-size: 20px;          /* Keep consistent with other headings */
+    }
+
+    .recipe-detail-meta {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .recipe-actions {
+        flex-direction: column;
+        display: flex !important; /* Ensure visible on mobile */
+    }
+
+    .btn-action {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Make filters easier to use on mobile */
+    .filter-title.collapsible {
+        padding: 12px 0;
+        font-size: 12px;
+    }
+
+    .filter-section {
+        margin-bottom: 15px;
+        padding-bottom: 12px;
+    }
+}
+
+/* Loading & No Results */
+.loading,
+.no-results {
+    text-align: center;
+    padding: 60px 20px;
+    font-size: 16px;
+    color: var(--text-gray);
+}
+
+/* Serving Adjuster */
+.recipe-servings {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.serving-btn {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--border-color);
+    background: white;
+    color: var(--primary-color);
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.serving-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Difficulty Badge */
+.difficulty {
+    padding: 4px 12px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.difficulty-easy {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.difficulty-medium {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.difficulty-hard {
+    background: #ffebee;
+    color: #c62828;
+}
+
+/* Dietary Tags */
+.dietary-tags {
+    display: flex;
+    gap: 8px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.dietary-tag {
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 400;
+    border: 1px solid var(--border-light);
+}
+
+.dietary-veg {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-color: #c8e6c9;
+}
+
+.dietary-fish {
+    background: #e3f2fd;
+    color: #1565c0;
+    border-color: #bbdefb;
+}
+
+.dietary-dessert {
+    background: #fce4ec;
+    color: #c2185b;
+    border-color: #f8bbd0;
+}
+
+.dietary-soup {
+    background: #fff3e0;
+    color: #e65100;
+    border-color: #ffe0b2;
+}
+
+/* Ingredient Checkboxes */
+.ingredient-check {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.recipe-ingredients label {
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.recipe-ingredients input[type="checkbox"]:checked + * {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+/* Recipe Notes */
+.recipe-notes {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-left: 3px solid var(--accent-red);
+}
+
+.recipe-notes p {
+    font-style: italic;
+    color: var(--text-gray);
+}
+
+/* Recipe Footer */
+.recipe-footer {
+    text-align: center;
+    margin: 60px 0 40px;
+    padding: 30px 0;
+    border-top: 1px solid var(--border-light);
+}
+
+.recipe-author {
+    color: var(--text-gray);
+    font-size: 14px;
+}
+
+/* Print Hide Class */
+.print-hide {
+    display: inline;
+}
+
+/* Print Styles - Optimized for A4 */
+@media print {
+    @page {
+        size: A4;
+        margin: 12mm;
+    }
+
+    .back-button,
+    .recipe-actions,
+    .footer,
+    .filter-bar,
+    .print-hide {
+        display: none !important;
+    }
+
+    body {
+        font-size: 9pt;
+        color: black;
+        line-height: 1.3;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .recipe-detail-header {
+        margin-bottom: 10px;
+        padding-bottom: 8px;
+    }
+
+    .recipe-detail-title {
+        font-size: 14pt;
+        color: black;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .recipe-detail-description {
+        font-size: 8.5pt;
+        margin: 6px 0;
+        line-height: 1.3;
+    }
+
+    .recipe-detail-meta {
+        font-size: 8pt;
+        margin: 6px 0;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .dietary-tags {
+        margin: 6px 0;
+    }
+
+    .dietary-tag {
+        font-size: 7.5pt;
+        padding: 2px 6px;
+        border: 1px solid #ccc;
+    }
+
+    .recipe-detail-image {
+        max-height: 120px;
+        width: auto;
+        margin: 8px auto;
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+
+    .recipe-detail-body {
+        grid-template-columns: 33% 1fr;
+        gap: 12px;
+    }
+
+    .recipe-detail-section {
+        margin: 0;
+        page-break-before: avoid;
+    }
+
+    .recipe-detail-section h2 {
+        font-size: 11pt;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .recipe-ingredients,
+    .recipe-directions {
+        padding: 0;
+        margin: 0;
+    }
+
+    .recipe-ingredients li {
+        padding: 3px 0;
+        font-size: 8.5pt;
+        border-bottom: none;
+        line-height: 1.3;
+        page-break-inside: avoid;
+    }
+
+    .recipe-ingredients li:first-child {
+        border-top: none;
+    }
+
+    .recipe-directions li {
+        padding: 5px 0 5px 30px;
+        font-size: 8.5pt;
+        line-height: 1.35;
+        border-bottom: none;
+        page-break-inside: avoid;
+    }
+
+    .recipe-directions li:first-child {
+        border-top: none;
+    }
+
+    .recipe-directions li::before {
+        width: 22px;
+        height: 22px;
+        font-size: 10pt;
+        top: 5px;
+    }
+
+    .recipe-notes {
+        margin: 10px 0;
+        padding: 8px;
+        font-size: 8.5pt;
+        line-height: 1.3;
+        page-break-inside: avoid;
+    }
+
+    .recipe-notes h2 {
+        font-size: 10pt;
+    }
+
+    /* Hide checkboxes in print */
+    .ingredient-check {
+        display: none;
+    }
+}

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Johann Lafer Rezepte</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Featured Recipes -->
+        <div id="featuredRecipes"></div>
+
+        <!-- Search and Filter Bar -->
+        <div class="filter-bar">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Rezept suchen...">
+            </div>
+
+            <!-- Filter Toggle Button -->
+            <div class="filter-toggle-header">
+                <button class="filter-toggle-btn" onclick="toggleAllFilters()">
+                    <span id="filterToggleText">Alle Filter</span>
+                    <span class="collapse-icon" id="filterToggleIcon">▼</span>
+                </button>
+            </div>
+
+            <!-- All Filters Container (collapsed by default) -->
+            <div class="all-filters-container collapsed" id="allFiltersContainer">
+
+            <!-- Category Filters -->
+            <div class="filter-section">
+                <h3 class="filter-title collapsible" onclick="toggleFilter(this)">
+                    <span>Kategorie</span>
+                    <span class="collapse-icon">▼</span>
+                </h3>
+                <div class="filter-content collapsed">
+                    <div class="category-filters">
+                        <button class="category-btn active" data-category="Alle">Alle</button>
+                        <div id="categoryButtons"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Time Filters -->
+            <div class="filter-section">
+                <h3 class="filter-title collapsible" onclick="toggleFilter(this)">
+                    <span>Zubereitungszeit</span>
+                    <span class="collapse-icon">▼</span>
+                </h3>
+                <div class="filter-content collapsed">
+                    <div class="time-filters" id="timeButtons"></div>
+                </div>
+            </div>
+
+            <!-- Allergen Filters -->
+            <div class="filter-section">
+                <h3 class="filter-title collapsible" onclick="toggleFilter(this)">
+                    <span>Ohne Allergene</span>
+                    <span class="collapse-icon">▼</span>
+                </h3>
+                <div class="filter-content collapsed">
+                    <div class="allergen-filters" id="allergenButtons"></div>
+                </div>
+            </div>
+
+            <!-- Season Filter -->
+            <div class="filter-section">
+                <h3 class="filter-title collapsible" onclick="toggleFilter(this)">
+                    <span>Jahreszeit</span>
+                    <span class="collapse-icon">▼</span>
+                </h3>
+                <div class="filter-content collapsed">
+                    <div class="season-filters" id="seasonButtons"></div>
+                </div>
+            </div>
+
+            <!-- Dietary Restrictions Filter -->
+            <div class="filter-section">
+                <h3 class="filter-title collapsible" onclick="toggleFilter(this)">
+                    <span>Ernährungsweise</span>
+                    <span class="collapse-icon">▼</span>
+                </h3>
+                <div class="filter-content collapsed">
+                    <div class="dietary-filters" id="dietaryButtons"></div>
+                </div>
+            </div>
+
+            <!-- Cooking Method Filter -->
+            <div class="filter-section">
+                <h3 class="filter-title collapsible" onclick="toggleFilter(this)">
+                    <span>Zubereitungsart</span>
+                    <span class="collapse-icon">▼</span>
+                </h3>
+                <div class="filter-content collapsed">
+                    <div class="cooking-method-filters" id="cookingMethodButtons"></div>
+                </div>
+            </div>
+
+            <!-- Difficulty Filter -->
+            <div class="filter-section">
+                <h3 class="filter-title collapsible" onclick="toggleFilter(this)">
+                    <span>Schwierigkeit</span>
+                    <span class="collapse-icon">▼</span>
+                </h3>
+                <div class="filter-content collapsed">
+                    <div class="difficulty-filters" id="difficultyButtons"></div>
+                </div>
+            </div>
+
+            <!-- Occasion Filter -->
+            <div class="filter-section">
+                <h3 class="filter-title collapsible" onclick="toggleFilter(this)">
+                    <span>Anlass</span>
+                    <span class="collapse-icon">▼</span>
+                </h3>
+                <div class="filter-content collapsed">
+                    <div class="occasion-filters" id="occasionButtons"></div>
+                </div>
+            </div>
+
+            <!-- Cost Level Filter -->
+            <div class="filter-section">
+                <h3 class="filter-title collapsible" onclick="toggleFilter(this)">
+                    <span>Preisniveau</span>
+                    <span class="collapse-icon">▼</span>
+                </h3>
+                <div class="filter-content collapsed">
+                    <div class="cost-filters" id="costButtons"></div>
+                </div>
+            </div>
+
+            </div><!-- Close all-filters-container -->
+        </div><!-- Close filter-bar -->
+
+        <!-- Recipe Count -->
+        <div class="recipe-count">
+            <span id="recipeCount">351</span> Rezepte gefunden
+        </div>
+
+        <!-- Recipe Grid -->
+        <div class="recipe-grid" id="recipeGrid">
+            <!-- Recipes will be loaded here by JavaScript -->
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; Johann Lafer - Alle Rezepte</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+
+    <!-- Iframe height communication for Shopify embed -->
+    <script>
+        // Detect if we're in an iframe
+        const isInIframe = window.self !== window.top;
+
+        // Add class to body and html if in iframe to hide scrollbar
+        if (isInIframe) {
+            document.body.classList.add('in-iframe');
+            document.documentElement.classList.add('in-iframe');
+        }
+
+        if (isInIframe) {
+            // Function to send height to parent
+            function sendHeight() {
+                // Wait a bit for layout to settle
+                requestAnimationFrame(() => {
+                    // Get the actual content height (container element)
+                    const container = document.querySelector('.container');
+                    const recipeGrid = document.querySelector('.recipe-grid');
+
+                    let height;
+                    if (container && container.offsetHeight > 0) {
+                        // Use the container height (includes all content)
+                        height = container.offsetHeight + 100; // Add some breathing room
+                    } else if (recipeGrid && recipeGrid.offsetHeight > 0) {
+                        // Fallback to recipe grid
+                        height = recipeGrid.offsetHeight + 300;
+                    } else {
+                        // Last resort: use document measurements
+                        height = Math.max(
+                            document.body.scrollHeight,
+                            document.body.offsetHeight,
+                            document.documentElement.scrollHeight
+                        );
+                    }
+
+                    // Send to parent window (Shopify)
+                    window.parent.postMessage({
+                        type: 'lafer-recipes-height',
+                        height: height
+                    }, '*');
+
+                    console.log('📏 Sent height to parent:', height, 'px (index)');
+                });
+            }
+
+            // Send height aggressively on load (multiple times to ensure it's received)
+            window.addEventListener('load', () => {
+                sendHeight(); // Immediate
+                setTimeout(sendHeight, 50);   // After 50ms
+                setTimeout(sendHeight, 100);  // After 100ms
+                setTimeout(sendHeight, 300);  // After 300ms
+                setTimeout(sendHeight, 500);  // After 500ms
+                setTimeout(sendHeight, 1000); // After 1s (final)
+            });
+
+            // Send immediately when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', sendHeight);
+            } else {
+                sendHeight(); // DOM already loaded
+            }
+
+            // Send height on resize
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(sendHeight, 150);
+            });
+
+            // Send height when content changes
+            const observer = new MutationObserver(() => {
+                sendHeight();
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+
+            // Send height periodically (fallback) - more frequent in first 10 seconds
+            let intervalCount = 0;
+            const heightInterval = setInterval(() => {
+                sendHeight();
+                intervalCount++;
+
+                // After 10 checks (10 seconds), slow down to every 3 seconds
+                if (intervalCount === 10) {
+                    clearInterval(heightInterval);
+                    setInterval(sendHeight, 3000);
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
