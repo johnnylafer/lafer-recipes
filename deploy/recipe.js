@@ -316,8 +316,8 @@ function createRecipeDetailHTML(recipe) {
         totalTime = (prepTime || 0) + (cookTime || 0);
     }
 
-    // Use AI description if available, otherwise generate one
-    const description = recipe.aiDescription || generateDescription(recipe);
+    // Use description from JSON if available, otherwise generate one
+    const description = recipe.description ? recipe.description.replace(/<[^>]*>/g, '').trim() : generateDescription(recipe);
     const difficulty = getDifficulty(recipe);
     const dietaryTags = getDietaryTags(recipe);
 
