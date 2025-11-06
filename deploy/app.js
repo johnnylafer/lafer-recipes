@@ -30,7 +30,7 @@ async function loadRecipes() {
             logicalCategory: recipe.aiCategory || categorizeRecipe(recipe),
             // Use AI-generated season for tags, fallback to keyword matching
             seasonalTags: recipe.season ? [{ name: recipe.season }] : getSeasonalTags(recipe),
-            aiDescription: recipe.aiDescription || generateAIDescription(recipe),
+            aiDescription: recipe.description ? recipe.description.replace(/<[^>]*>/g, '').trim() : generateAIDescription(recipe),
             // Use AI allergens if available, fallback to regex detection
             allergens: recipe.aiAllergens || detectAllergens(recipe),
             totalTime: recipe.estimatedTime || calculateTotalTime(recipe)
