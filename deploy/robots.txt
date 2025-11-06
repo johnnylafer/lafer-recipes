@@ -1,0 +1,11 @@
+# Robots.txt for lafer-rezepte.pages.dev
+# This is the iframe source - we don't want it indexed
+# Only lafer.de/pages/rezepte should be indexed for SEO
+
+User-agent: *
+Disallow: /
+
+# Allow crawling of recipes.json for the Shopify page to fetch
+Allow: /recipes.json
+
+# No sitemap here - sitemap is on lafer.de
